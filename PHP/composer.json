@@ -1,0 +1,13 @@
+{
+    "name": "hamim/github",
+    "authors": [
+        {
+            "name": "Hamim Sazadah",
+            "email": "hamim.sazadah@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.3",
+        "predis/predis": "^1.1"
+    }
+}

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: telkomindonesia/alpine:redis-5.0
+        ports:
+        - containerPort: 6379
+        resources:
+          limits:
+            memory: 1Gi
+        volumeMounts:
+          - name: redis
+            mountPath: /var/lib/redis/data
+      volumes:
+        - name: redis
+          emptyDir: {}
+      restartPolicy: Always
+      schedulerName: default-scheduler
+
+
+
+
