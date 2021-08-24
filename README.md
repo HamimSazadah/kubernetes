@@ -27,6 +27,9 @@
 ```docker push hamimsazadah/demo```
 
 # Kubernetes
+Run minikube first 
+```minikube start``` for ssh to minikube ```miinikube ssh``` 
+
 
 ## Check Node
 ```kubectl get node```
@@ -34,8 +37,17 @@
 ## Run Image
 ```kubectl run demo --image=telkomindonesia/alpine:php-7.1-apache-novol --port=8080```
 
-## get runnning pods
+## Get runnning pods
 ```kubectl get pods```
 
-## Run command in Continer
-```exec -it demo -- sh```
+## Run command in Container
+```kubectl exec -it demo -- sh```
+
+## Create kubernetes Resource from yaml
+```kubectl create -f php.yaml```
+
+## port-forward container
+```kubectl port-forward demo 8080:8080```
+
+## Check log pod
+```kubectl logs demo```
