@@ -28,7 +28,9 @@
 
 # Kubernetes
 Run minikube first 
-```minikube start``` for ssh to minikube ```miinikube ssh``` 
+```minikube start```
+for ssh to minikube ```miinikube ssh```
+show dashboard ```minikube dashboard``` 
 
 
 ## Check Node
@@ -51,3 +53,6 @@ Run minikube first
 
 ## Check log pod
 ```kubectl logs demo```
+
+## Delete resource
+```kubectl delete po demo```
