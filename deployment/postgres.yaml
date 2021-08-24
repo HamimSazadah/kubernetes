@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: telkomindonesia/debian:postgresql-11
+        ports:
+        - containerPort: 5432
+        resources:
+          limits:
+            memory: 1Gi
+        volumeMounts:
+          - name: postgres
+            mountPath: /var/lib/pgsql/data
+      volumes:
+        - name: postgres
+          persistentVolumeClaim:
+            claimName: postgres
