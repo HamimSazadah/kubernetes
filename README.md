@@ -78,26 +78,32 @@ for list node
 ```kubectl delete po demo```
 
 # Practice
-1. Create PersistentVolume for postgres and redis in folder volume.
+1. Create image repo in hub.docker.com, name yourname/demo
+2. Create demo image and push hub.docker.com
+   1. docker build -t demo PHP/
+   2. docker images
+   3. docker tag demo hamimsazadah/demo
+   4. docker push hamimsazadah/demo
+3. Create PersistentVolume for postgres and redis in folder volume.
    1. kubectl create -f volume/postgres.yaml
    2. kubectl create -f volume/redis.yaml
-2. Create PersistentVolumeClim for postgres and redis in folder pvc.
+4. Create PersistentVolumeClim for postgres and redis in folder pvc.
    1. kubectl create -f pvc/postgres-pvc.yaml
    2. kubectl create -f pvc/redis-pvc.yaml
-3. Create Deployment for php, postgres and redis in folder deployment.
+5. Create Deployment for php, postgres and redis in folder deployment.
    1. kubectl create -f deployment/postgres.yaml
    2. kubectl create -f deployment/redis.yaml
    3. kubectl create -f deployment/php.yaml
-4. Populate table to postgres.
+6. Populate table to postgres.
    1. kubectl exec -it postgres-84d8bcf584-l5t5c -- sh
    2. $psql db
    3. copy and paste postgres.sql
-5. Create Service for postgres and redis.
+7. Create Service for postgres and redis.
    1. kubectl create -f service/postgres.yaml
    2. kubectl create -f service/redis.yaml
-6. Scale php deployment 4 replicas.
+8. Scale php deployment 4 replicas.
    1. kubectl scale deploy php --replicas=4
-7. Expose using port-forward to localhost.
+9. Expose using port-forward to localhost.
    1. kubectl port-forward php-d55fdd7d5-n7kxb 8080:8080
    2. open in browser localhost:8080
    3. and localhost:8080/app.php?id=2 periodicly
