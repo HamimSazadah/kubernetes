@@ -10,5 +10,5 @@ insert into users values (2,'Azula','Azula@gmail.com');
 insert into users values (3,'Aang','aang@gmail.com');
 insert into users values (4,'Balmond','balmond@gmail.com');
 insert into users values (5,'Budi','budi@gmail.com');
-insert into users values (6,'Agus','agus@gmail.com');
-insert into users values (7,'Laks','laks@gmail.com');
+insert into users values (6,'Karyo','karyo@gmail.com');
+insert into users values (7,'Doel','doel@gmail.com');

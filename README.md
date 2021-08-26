@@ -1,39 +1,56 @@
 # Prerequisite 
-1. Install [Docker Desktop]([https://link](https://www.docker.com/get-started)) 
-2. Register [Docker Hub]([https://link](https://hub.docker.com/signup))
-3. Install [Minikube]([https://link](https://minikube.sigs.k8s.io/docs/start/))
+1. Install [Docker Desktop](https://www.docker.com/get-started)
+2. Register [Docker Hub](https://hub.docker.com/signup)
+3. Install [Minikube](https://minikube.sigs.k8s.io/docs/start/)
  
 
 
 # Docker
 ## Build Image
+build image from Dockerfile and tag as "demo"
+
 ```docker build -t demo .```
 
 ## RUN Image
+run image with detach(run in background) and port-forward to 8080 port
+
 ```docker run -dp 8080:8080 demo```
 
 ## List Process
 ```docker ps```
 
 ## Access Container
+access continer interactively and run bash shell
+
 ```docker exec -it xxxx sh```
 
 ## Kill Process
-```docker kill xxxx```
+```docker kill process_id```
 
 ## tag image
+tag image demo as hamimsazadah/demo (hub.docker standar name)
 ```docker tag demo hamimsazadah/demo```
 ## push image
+push image to hub.docker
 ```docker push hamimsazadah/demo```
 
 # Kubernetes
 Run minikube first 
+
 ```minikube start```
-for ssh to minikube ```miinikube ssh```
-show dashboard ```minikube dashboard``` 
+
+for ssh to minikube 
+
+```miinikube ssh```
+
+show dashboard 
+
+```minikube dashboard``` 
 
 
-## Check Node
+## List Node
+for list node
+
 ```kubectl get node```
 
 ## Run Image
@@ -54,5 +71,39 @@ show dashboard ```minikube dashboard```
 ## Check log pod
 ```kubectl logs demo```
 
+## Scale pod
+```Kubectl scale deploy demo --replicas=4```
+
 ## Delete resource
 ```kubectl delete po demo```
+
+# Practice
+1. Create PersistentVolume for postgres and redis in folder volume.
+   1. kubectl create -f volume/postgres.yaml
+   2. kubectl create -f volume/redis.yaml
+2. Create PersistentVolumeClim for postgres and redis in folder pvc.
+   1. kubectl create -f pvc/postgres-pvc.yaml
+   2. kubectl create -f pvc/redis-pvc.yaml
+3. Create Deployment for php, postgres and redis in folder deployment.
+   1. kubectl create -f deployment/postgres.yaml
+   2. kubectl create -f deployment/redis.yaml
+   3. kubectl create -f deployment/php.yaml
+4. Populate table to postgres.
+   1. kubectl exec -it postgres-84d8bcf584-l5t5c -- sh
+   2. $psql db
+   3. copy and paste postgres.sql
+5. Create Service for postgres and redis.
+   1. kubectl create -f service/postgres.yaml
+   2. kubectl create -f service/redis.yaml
+6. Scale php deployment 4 replicas.
+   1. kubectl scale deploy php --replicas=4
+7. Expose using port-forward to localhost.
+   1. kubectl port-forward php-d55fdd7d5-n7kxb 8080:8080
+   2. open in browser localhost:8080
+   3. and localhost:8080/app.php?id=2 periodicly
+
+* always check logs if error and pod is not ready.
+* and use ```kubectl describe po pod_name``` for cek event in pod.
+* we need access minikube by ssh for create userdata directory for postgres
+  * minikube ssh
+  * mkdir /data/postgres/userdata/
